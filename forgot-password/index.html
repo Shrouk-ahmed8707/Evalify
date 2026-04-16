@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/x-icon" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Forgot Password - Evalify</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#4F46E5',
+            secondary: '#E0E6FC',
+          },
+          fontFamily: {
+            sans: ['Poppins', 'Inter', 'sans-serif'],
+          },
+          animation: {
+            blob: "blob 7s infinite",
+          },
+          keyframes: {
+            blob: {
+              "0%": { transform: "translate(0px, 0px) scale(1)" },
+              "33%": { transform: "translate(30px, -50px) scale(1.1)" },
+              "66%": { transform: "translate(-20px, 20px) scale(0.9)" },
+              "100%": { transform: "translate(0px, 0px) scale(1)" },
+            },
+          },
+        }
+      }
+    }
+  </script>
+  <style type="text/tailwindcss">
+    @layer base {
+          body {
+            @apply font-sans text-gray-800 antialiased bg-gray-50;
+          }
+        }
+        @layer components {
+          .btn-primary {
+            @apply bg-primary text-white px-6 py-2 rounded-full font-medium transition-all duration-300 hover:bg-opacity-90 hover:shadow-lg transform hover:-translate-y-0.5;
+          }
+          .btn-outline {
+            @apply border-2 border-primary text-primary px-6 py-2 rounded-full font-medium transition-all duration-300 hover:bg-primary hover:text-white hover:shadow-lg transform hover:-translate-y-0.5;
+          }
+          .nav-link {
+            @apply text-gray-700 font-medium hover:text-primary transition-colors duration-300;
+          }
+          .input-field {
+            @apply w-full pl-10 pr-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-300 bg-white;
+          }
+        }
+        .animation-delay-2000 {
+          animation-delay: 2s;
+        }
+        .animation-delay-4000 {
+          animation-delay: 4s;
+        }
+      </style>
+</head>
+
+<body class="bg-gray-50 flex flex-col min-h-screen">
+  <!-- Navbar -->
+  <nav class="w-full bg-white shadow-sm z-50 transition-all duration-300" id="navbar">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-20">
+        <!-- Logo -->
+        <div class="flex-shrink-0 flex items-center cursor-pointer" onclick="window.location.href='/'">
+          <img src="/cb8b81f3f695ccaa88a2a199a16d5e49e712edf3(1)(1).png" alt="Evalify Logo"
+            class="w-25 h-8 object-contain mr-2">
+        </div>
+
+        <!-- Menu Items (Desktop) -->
+        <div class="hidden md:flex space-x-8">
+          <a href="/" class="nav-link">Home</a>
+          <a href="/#about" class="nav-link">About Us</a>
+          <a href="/#contact" class="nav-link">Contact Us</a>
+        </div>
+
+        <!-- Buttons (Desktop) -->
+        <div class="hidden md:flex space-x-4 items-center">
+          <button class="btn-outline" onclick="window.location.href='/register/'">Register Now</button>
+        </div>
+
+        <!-- Mobile menu button -->
+        <div class="md:hidden flex items-center">
+          <button id="mobile-menu-btn" class="text-gray-500 hover:text-primary focus:outline-none">
+            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Menu Panel -->
+    <div id="mobile-menu"
+      class="hidden md:hidden bg-white border-t border-gray-100 px-4 pt-2 pb-6 space-y-4 shadow-lg absolute w-full">
+      <a href="/" class="block nav-link py-2">Home</a>
+      <a href="/#about" class="block nav-link py-2">About Us</a>
+      <a href="/#contact" class="block nav-link py-2">Contact Us</a>
+      <div class="flex flex-col space-y-3 pt-4 border-t border-gray-100">
+        <button class="btn-outline w-full text-center" onclick="window.location.href='/register/'">Register Now</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="flex-grow flex items-center justify-center py-12 relative overflow-hidden">
+    <!-- Background blobs -->
+    <div class="absolute top-0 right-0 w-96 h-96 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 translate-x-1/3 -translate-y-1/3 animate-blob"></div>
+    <div class="absolute bottom-0 left-0 w-96 h-96 bg-secondary rounded-full mix-blend-multiply filter blur-3xl opacity-30 -translate-x-1/3 translate-y-1/3 animate-blob animation-delay-2000"></div>
+
+    <div class="max-w-6xl mx-auto px-4 w-full relative z-10 transition-all duration-500 delay-100" id="wrapper-container">
+      <div class="bg-white rounded-3xl shadow-xl overflow-hidden flex flex-col md:flex-row border border-gray-100 relative min-h-[500px]">
+        
+        <!-- Left Side: Forms Container -->
+        <div id="forms-side" class="w-full md:w-1/2 p-8 md:p-12 lg:p-16 flex flex-col justify-center transition-all duration-500 z-20">
+          
+          <!-- STATE 1: Reset Password -->
+          <div id="state-reset">
+            <div class="max-w-md mx-auto w-full">
+              <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Reset Password</h1>
+
+              <form id="reset-form" class="space-y-6">
+                <!-- Email Field -->
+                <div>
+                  <label for="email" class="block text-sm font-medium text-gray-700 mb-1 ml-1">Email</label>
+                  <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                      <i class="fas fa-envelope text-gray-400"></i>
+                    </div>
+                    <input type="email" id="email" name="email" required
+                      class="input-field" placeholder="Email Address">
+                  </div>
+                </div>
+
+                <!-- Submit Button -->
+                <button id="send-email-btn" type="submit" class="w-full bg-primary text-white py-3 rounded-xl font-semibold shadow-lg hover:bg-opacity-90 transition-all duration-300 transform hover:-translate-y-0.5 hover:shadow-xl mt-6 disabled:opacity-75 disabled:cursor-not-allowed">
+                  Send Email
+                </button>
+
+                <!-- Feedback Message -->
+                <div id="reset-feedback" class="hidden text-center text-sm font-medium p-3 rounded-lg mt-4 transition-all duration-300"></div>
+              </form>
+            </div>
+          </div>
+
+          <!-- STATE 3: Create New Password -->
+          <div id="state-create-password" class="hidden opacity-0 transition-opacity duration-300">
+            <div class="max-w-md mx-auto w-full">
+              <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-2">Create new password</h1>
+              <p class="text-gray-500 mb-8 text-sm">Your new password must be different from previous used password.</p>
+
+              <form id="create-password-form" class="space-y-6">
+                <!-- New Password -->
+                <div>
+                  <label for="new-password" class="block text-sm font-medium text-gray-700 mb-1 ml-1">New password</label>
+                  <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                      <i class="fas fa-lock text-gray-400"></i>
+                    </div>
+                    <input type="password" id="new-password" name="new-password" required
+                      class="input-field pr-12" placeholder="Password">
+                    <button type="button" id="toggle-new-password" class="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400 hover:text-primary focus:outline-none transition-colors">
+                      <i class="fas fa-eye" id="eye-icon-new"></i>
+                    </button>
+                  </div>
+                  <p class="text-xs text-gray-500 mt-1 ml-1">must be at least 8 characters</p>
+                </div>
+
+                <!-- Confirm Password -->
+                <div>
+                  <label for="confirm-password" class="block text-sm font-medium text-gray-700 mb-1 ml-1">Confirm password</label>
+                  <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                      <i class="fas fa-lock text-gray-400"></i>
+                    </div>
+                    <input type="password" id="confirm-password" name="confirm-password" required
+                      class="input-field pr-12" placeholder="Password">
+                    <button type="button" id="toggle-confirm-password" class="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400 hover:text-primary focus:outline-none transition-colors">
+                      <i class="fas fa-eye" id="eye-icon-confirm"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Submit Button -->
+                <button id="create-password-btn" type="submit" class="w-full bg-primary text-white py-3 rounded-xl font-semibold shadow-lg hover:bg-opacity-90 transition-all duration-300 transform hover:-translate-y-0.5 hover:shadow-xl mt-6 disabled:opacity-75 disabled:cursor-not-allowed">
+                  Log in
+                </button>
+
+                <!-- Feedback Message -->
+                <div id="feedback-message" class="hidden text-center text-sm font-medium p-3 rounded-lg mt-4 transition-all duration-300"></div>
+              </form>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Right Side: 3D Illustration -->
+        <div id="illustration-side" class="w-full md:w-1/2 bg-gradient-to-br from-purple-50 to-secondary p-8 flex items-center justify-center relative overflow-hidden hidden md:flex transition-all duration-500 z-10">
+           <!-- Dynamic decorative rings -->
+           <div class="absolute w-[120%] h-[120%] border-[40px] border-white/40 rounded-full animate-[spin_30s_linear_infinite]"></div>
+           <div class="absolute inset-0 bg-primary/5 backdrop-blur-[2px]"></div>
+           <img src="../42f6c0980edf150b38ac6f2380dbd43649090a4b.png" alt="3D AI Robot Illustration" class="relative z-10 w-full max-w-md object-contain drop-shadow-2xl hover:scale-105 transition-transform duration-700 ease-in-out">
+        </div>
+        
+        <!-- STATE 2: Check Your Mail (Absolute overlay to cover entire inner card) -->
+        <div id="state-check-mail" class="absolute inset-0 bg-white z-30 flex items-center justify-center hidden opacity-0 transition-opacity duration-500">
+           <div class="max-w-md w-full px-6 py-8 text-center flex flex-col items-center">
+             <div class="w-20 h-20 bg-primary bg-opacity-10 text-primary rounded-2xl flex items-center justify-center mb-6">
+                <i class="fas fa-envelope text-4xl"></i>
+             </div>
+             <h2 class="text-3xl font-bold text-gray-900 mb-4">Check your mail</h2>
+             <p class="text-gray-500 mb-8">We have sent a password recover instructions to your email.</p>
+             
+             <a href="https://mail.google.com" target="_blank" class="w-full bg-primary text-white py-3 rounded-xl font-semibold shadow-lg hover:bg-opacity-90 transition-all duration-300 transform hover:-translate-y-0.5 hover:shadow-xl block text-center mb-6">
+               Open Gmail
+             </a>
+             
+             <p class="text-sm text-gray-500">
+               Did not receive the email? Check your spam filter,<br>or <a href="#" id="resend-mail" class="text-primary font-medium hover:underline">try to send it again</a>
+             </p>
+           </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-gray-50 py-8 border-t border-gray-200 mt-auto">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+        <!-- Logo -->
+        <div class="flex items-center cursor-pointer" onclick="window.location.href='/'">
+          <img src="/cb8b81f3f695ccaa88a2a199a16d5e49e712edf3(1)(1).png" alt="Evalify Logo"
+            class="w-25 h-8 object-contain mr-2 filter drop-shadow-sm">
+        </div>
+
+        <!-- Copyright -->
+        <div class="text-gray-500 text-sm font-medium">
+          Copyright &copy; 2026 All rights reserved
+        </div>
+
+        <!-- Socials -->
+        <div class="flex space-x-4">
+          <a href="#"
+            class="w-10 h-10 rounded-full bg-white border border-gray-200 flex items-center justify-center text-gray-500 hover:bg-primary hover:text-white transition-all duration-300 hover:shadow-md transform hover:-translate-y-1">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="#"
+            class="w-10 h-10 rounded-full bg-white border border-gray-200 flex items-center justify-center text-gray-500 hover:bg-primary hover:text-white transition-all duration-300 hover:shadow-md transform hover:-translate-y-1">
+            <i class="fab fa-google"></i>
+          </a>
+          <a href="#"
+            class="w-10 h-10 rounded-full bg-white border border-gray-200 flex items-center justify-center text-gray-500 hover:bg-primary hover:text-white transition-all duration-300 hover:shadow-md transform hover:-translate-y-1">
+            <i class="fab fa-whatsapp"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module">
+    document.addEventListener('DOMContentLoaded', () => {
+      // Mobile menu toggle logic
+      const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+      const mobileMenu = document.getElementById('mobile-menu');
+      if (mobileMenuBtn && mobileMenu) {
+        mobileMenuBtn.addEventListener('click', () => {
+          mobileMenu.classList.toggle('hidden');
+        });
+      }
+      
+      // Elements
+      const stateReset = document.getElementById('state-reset');
+      const stateCheckMail = document.getElementById('state-check-mail');
+      const stateCreatePassword = document.getElementById('state-create-password');
+      
+      const resetForm = document.getElementById('reset-form');
+      const emailInput = document.getElementById('email');
+      const sendEmailBtn = document.getElementById('send-email-btn');
+      const resetFeedback = document.getElementById('reset-feedback');
+      
+      const createPasswordForm = document.getElementById('create-password-form');
+      const newPasswordInput = document.getElementById('new-password');
+      const confirmPasswordInput = document.getElementById('confirm-password');
+      const createPasswordBtn = document.getElementById('create-password-btn');
+      const feedbackMessage = document.getElementById('feedback-message');
+      
+      const resendMailLink = document.getElementById('resend-mail');
+
+      // Toggles for password visibility
+      setupPasswordToggle('toggle-new-password', 'new-password', 'eye-icon-new');
+      setupPasswordToggle('toggle-confirm-password', 'confirm-password', 'eye-icon-confirm');
+
+      function setupPasswordToggle(btnId, inputId, iconId) {
+        const toggleBtn = document.getElementById(btnId);
+        const passField = document.getElementById(inputId);
+        const eyeIcon = document.getElementById(iconId);
+
+        if(toggleBtn) {
+          toggleBtn.addEventListener('click', function () {
+              const type = passField.getAttribute('type') === 'password' ? 'text' : 'password';
+              passField.setAttribute('type', type);
+              if (type === 'password') {
+                  eyeIcon.classList.remove('fa-eye-slash');
+                  eyeIcon.classList.add('fa-eye');
+              } else {
+                  eyeIcon.classList.remove('fa-eye');
+                  eyeIcon.classList.add('fa-eye-slash');
+              }
+          });
+        }
+      }
+
+      // STATE 1: Reset Password Logic
+      if(resetForm) {
+        resetForm.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          
+          const email = emailInput.value;
+          if (!email) return;
+
+          // Set Loading State
+          sendEmailBtn.disabled = true;
+          sendEmailBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Sending...';
+          resetFeedback.classList.add('hidden');
+          resetFeedback.className = 'hidden text-center text-sm font-medium p-3 rounded-lg mt-4 transition-all duration-300';
+
+          try {
+            // Simulate network request
+            await new Promise(resolve => setTimeout(resolve, 1500));
+            
+            // Success - show check mail state
+            transitionState('check-mail');
+            
+          } catch (error) {
+            resetFeedback.innerHTML = 'An error occurred. Please try again.';
+            resetFeedback.classList.remove('hidden');
+            resetFeedback.classList.add('bg-red-100', 'text-red-700');
+          } finally {
+            sendEmailBtn.disabled = false;
+            sendEmailBtn.innerHTML = 'Send Email';
+          }
+        });
+      }
+
+      // STATE 2: Resend Mail Logic
+      if(resendMailLink) {
+        resendMailLink.addEventListener('click', async (e) => {
+          e.preventDefault();
+          
+          if (resendMailLink.classList.contains('pointer-events-none')) return;
+          
+          const originalHTML = resendMailLink.innerHTML;
+          
+          // Set Loading State
+          resendMailLink.innerHTML = '<i class="fas fa-spinner fa-spin mr-1"></i>Sending...';
+          resendMailLink.classList.add('opacity-75', 'pointer-events-none', 'no-underline');
+          resendMailLink.classList.remove('hover:underline');
+
+          try {
+            // Simulate network request
+            await new Promise(resolve => setTimeout(resolve, 1500));
+            
+            // Success response
+            resendMailLink.innerHTML = '<i class="fas fa-check mr-1 text-green-600"></i><span class="text-green-600">Sent!</span>';
+            
+            // Revert back after 3 seconds
+            setTimeout(() => {
+              resendMailLink.innerHTML = originalHTML;
+              resendMailLink.classList.remove('opacity-75', 'pointer-events-none', 'no-underline');
+              resendMailLink.classList.add('hover:underline');
+            }, 3000);
+          } catch (error) {
+            resendMailLink.innerHTML = originalHTML;
+            resendMailLink.classList.remove('opacity-75', 'pointer-events-none', 'no-underline');
+            resendMailLink.classList.add('hover:underline');
+          }
+        });
+      }
+      
+      // Developer testing trick: clicking the envelope icon in state 2 moves to state 3
+      const checkMailIcon = document.querySelector('#state-check-mail .fa-envelope');
+      if (checkMailIcon) {
+          checkMailIcon.parentElement.addEventListener('click', () => {
+              transitionState('create-password');
+          });
+          checkMailIcon.parentElement.style.cursor = 'pointer';
+          checkMailIcon.parentElement.title = 'DEV ONLY: Click to proceed to Create Password state';
+      }
+
+      // STATE 3: Create New Password Logic
+      if(createPasswordForm) {
+        createPasswordForm.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          
+          const newPass = newPasswordInput.value;
+          const confirmPass = confirmPasswordInput.value;
+          
+          // Validation
+          if (newPass.length < 8) {
+            showCreateFeedback('Password must be at least 8 characters long.', 'error');
+            return;
+          }
+          
+          if (newPass !== confirmPass) {
+            showCreateFeedback('Passwords do not match.', 'error');
+            return;
+          }
+
+          // Set Loading State
+          createPasswordBtn.disabled = true;
+          createPasswordBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Processing...';
+          feedbackMessage.classList.add('hidden');
+
+          try {
+            // Simulate network request
+            await new Promise(resolve => setTimeout(resolve, 1500));
+            
+            // Success response
+            showCreateFeedback('Password successfully reset! Redirecting to login...', 'success');
+            createPasswordBtn.innerHTML = '<i class="fas fa-check mr-2"></i>Success';
+            createPasswordBtn.classList.replace('bg-primary', 'bg-green-500');
+            
+            // Redirect
+            setTimeout(() => {
+              window.location.href = '/login/';
+            }, 1500);
+            
+          } catch (error) {
+            showCreateFeedback('An error occurred. Please try again.', 'error');
+            createPasswordBtn.disabled = false;
+            createPasswordBtn.innerHTML = 'Log in';
+          }
+        });
+      }
+
+      function showCreateFeedback(msg, type) {
+        feedbackMessage.innerHTML = msg;
+        feedbackMessage.className = 'text-center text-sm font-medium p-3 rounded-lg mt-4 transition-all duration-300';
+        feedbackMessage.classList.remove('hidden');
+        if (type === 'error') {
+            feedbackMessage.classList.add('bg-red-100', 'text-red-700');
+        } else {
+            feedbackMessage.classList.add('bg-green-100', 'text-green-700');
+        }
+      }
+
+      // State Transition Function
+      function transitionState(newState) {
+        if (newState === 'check-mail') {
+            // Hide left side completely (or just overlay over everything)
+            stateCheckMail.classList.remove('hidden');
+            // Allow display block to apply before changing opacity
+            setTimeout(() => {
+                stateCheckMail.classList.remove('opacity-0');
+            }, 10);
+        } else if (newState === 'reset') {
+            stateCheckMail.classList.add('opacity-0');
+            setTimeout(() => {
+                stateCheckMail.classList.add('hidden');
+            }, 500);
+            
+            stateReset.classList.remove('hidden');
+            setTimeout(() => {
+                stateReset.classList.remove('opacity-0');
+                stateReset.style.display = 'block';
+            }, 10);
+            
+            stateCreatePassword.classList.add('opacity-0');
+            setTimeout(() => {
+                stateCreatePassword.classList.add('hidden');
+            }, 500);
+            
+        } else if (newState === 'create-password') {
+            // Hide check mail overlay
+            stateCheckMail.classList.add('opacity-0');
+            setTimeout(() => {
+                stateCheckMail.classList.add('hidden');
+            }, 500);
+            
+            // Hide reset state
+            stateReset.style.display = 'none';
+            stateReset.classList.add('opacity-0');
+            
+            // Show create password
+            stateCreatePassword.classList.remove('hidden');
+            setTimeout(() => {
+                stateCreatePassword.classList.remove('opacity-0');
+            }, 10);
+        }
+      }
+      
+      // Auto-init state on load based on hash if needed, else start with Reset
+      // For this workflow, we default to Reset, let User transition manually.
+    });
+  </script>
+</body>
+</html>

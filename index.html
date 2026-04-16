@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/x-icon" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Evalify - Electronic Exam Grading</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#4F46E5',
+            secondary: '#E0E6FC',
+          },
+          fontFamily: {
+            sans: ['Poppins', 'Inter', 'sans-serif'],
+          },
+          animation: {
+            blob: "blob 7s infinite",
+          },
+          keyframes: {
+            blob: {
+              "0%": { transform: "translate(0px, 0px) scale(1)" },
+              "33%": { transform: "translate(30px, -50px) scale(1.1)" },
+              "66%": { transform: "translate(-20px, 20px) scale(0.9)" },
+              "100%": { transform: "translate(0px, 0px) scale(1)" },
+            },
+          },
+        }
+      }
+    }
+  </script>
+  <style type="text/tailwindcss">
+    @layer base {
+        body {
+          @apply font-sans text-gray-800 antialiased bg-white;
+        }
+      }
+      @layer components {
+        .btn-primary {
+          @apply bg-primary text-white px-6 py-2 rounded-full font-medium transition-all duration-300 hover:bg-opacity-90 hover:shadow-lg transform hover:-translate-y-0.5;
+        }
+        .btn-outline {
+          @apply border-2 border-primary text-primary px-6 py-2 rounded-full font-medium transition-all duration-300 hover:bg-primary hover:text-white hover:shadow-lg transform hover:-translate-y-0.5;
+        }
+        .nav-link {
+          @apply text-gray-700 font-medium hover:text-primary transition-colors duration-300;
+        }
+      }
+      .animation-delay-2000 {
+        animation-delay: 2s;
+      }
+    </style>
+</head>
+
+<body>
+  <!-- Navbar -->
+  <nav class="fixed w-full top-0 left-0 bg-white shadow-sm z-50 transition-all duration-300" id="navbar">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-20">
+        <!-- Logo -->
+        <div class="flex-shrink-0 flex items-center cursor-pointer" onclick="window.location.href='/'">
+          <div class="text-primary mr-2 flex flex-col justify-center items-center font-bold text-2xl leading-none">
+            <!-- <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 8H20M4 16H16M4 24H22M22 10L28 16L20 28" stroke="#6C4DFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg> -->
+          </div>
+          <!-- <span class="font-bold text-2xl bg-clip-text text-transparent bg-gradient-to-r from-primary to-purple-600">Evalify</span> -->
+          <img src="cb8b81f3f695ccaa88a2a199a16d5e49e712edf3(1)(1).png" alt="Evalify Logo"
+            class="w-25 h-8 object-contain mr-2">
+        </div>
+
+        <!-- Menu Items (Desktop) -->
+        <div class="hidden md:flex space-x-8">
+          <a href="#" class="nav-link">Home</a>
+          <a href="#about" class="nav-link">About Us</a>
+          <a href="#contact" class="nav-link">Contact Us</a>
+        </div>
+
+        <!-- Buttons (Desktop) -->
+        <div class="hidden md:flex space-x-4 items-center">
+          <button class="btn-primary" onclick="window.location.href='/login/'">Log In</button>
+          <button class="btn-outline" onclick="window.location.href='/register/'">Register Now</button>
+        </div>
+
+        <!-- Mobile menu button -->
+        <div class="md:hidden flex items-center">
+          <button id="mobile-menu-btn" class="text-gray-500 hover:text-primary focus:outline-none">
+            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Menu Panel -->
+    <div id="mobile-menu"
+      class="hidden md:hidden bg-white border-t border-gray-100 px-4 pt-2 pb-6 space-y-4 shadow-lg absolute w-full">
+      <a href="#" class="block nav-link py-2">Home</a>
+      <a href="#about" class="block nav-link py-2">About Us</a>
+      <a href="#contact" class="block nav-link py-2">Contact Us</a>
+      <div class="flex flex-col space-y-3 pt-4 border-t border-gray-100">
+        <button class="btn-primary w-full text-center" onclick="window.location.href='/login/'">Log In</button>
+        <button class="btn-outline w-full text-center" onclick="window.location.href='/register/'">Register Now</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="pt-28 pb-16 md:pt-36 md:pb-24 overflow-hidden relative">
+    <!-- Background subtle blobs -->
+    <div
+      class="absolute top-0 left-0 w-64 h-64 bg-secondary rounded-full mix-blend-multiply filter blur-3xl opacity-50 -translate-x-1/2 -translate-y-1/2 animate-blob">
+    </div>
+    <div
+      class="absolute top-20 right-0 w-72 h-72 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-50 translate-x-1/3 animate-blob animation-delay-2000">
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="flex flex-col-reverse md:flex-row items-center gap-12">
+        <!-- Left Content -->
+        <div class="w-full md:w-1/2 text-center md:text-left">
+          <img src="cb8b81f3f695ccaa88a2a199a16d5e49e712edf3(1)(1).png" alt="AI Robot grading exam"
+            class="w-30 max-w-md lg:max-w-lg object-contain relative z-10  drop-shadow-xl mb-6" />
+
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 text-gray-900">
+            Electronic Exam<br /><span class="text-primary">Grading</span>
+          </h1>
+          <p class="text-lg md:text-xl text-gray-600 mb-8 max-w-lg mx-auto md:mx-0">
+            Automate handwritten exam evaluation using AI and computer vision
+          </p>
+          <button class="btn-primary px-8 py-3 text-lg shadow-lg hover:shadow-xl group">
+            Start Now
+            <i
+              class="fas fa-arrow-right ml-2 inline-block transition-transform duration-300 group-hover:translate-x-1"></i>
+          </button>
+        </div>
+        <!-- Right Content (Image) -->
+        <div class="w-full md:w-1/2 flex justify-center relative">
+          <div class="absolute inset-0 bg-secondary rounded-full filter blur-3xl opacity-40 animate-pulse"></div>
+          <img src="01b4c6e29a452bcafafcfa385b42b46b660a1567.png" alt="AI Robot grading exam"
+            class="w-full max-w-md lg:max-w-lg text-center object-contain relative z-10 transform transition-transform duration-700 hover:scale-105 drop-shadow-xl " />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Us Section -->
+  <section id="about" class="py-20 bg-white relative border-t border-gray-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row items-center gap-16">
+        <!-- Left Content -->
+        <div class="w-full md:w-3/5">
+          <h2 class="text-3xl md:text-4xl font-bold text-primary mb-6">About Us</h2>
+          <p class="text-lg text-gray-600 leading-relaxed mb-6">
+            Modern efficiency by automating exam correction and providing deep insights into student performance. We
+            eliminate administrative burdens.
+          </p>
+          <p class="text-lg text-gray-600 leading-relaxed">
+            We offer an intuitive all-in-one ecosystem where instructors can manage workflows effortlessly.
+          </p>
+          <!-- <div class="mt-8 flex items-center space-x-4">
+            <div
+              class="w-12 h-12 rounded-full bg-secondary flex items-center justify-center text-primary text-xl shadow-sm">
+              <i class="fas fa-chart-line"></i>
+            </div>
+            <div
+              class="w-12 h-12 rounded-full bg-secondary flex items-center justify-center text-primary text-xl shadow-sm">
+              <i class="fas fa-microchip"></i>
+            </div>
+            <div
+              class="w-12 h-12 rounded-full bg-secondary flex items-center justify-center text-primary text-xl shadow-sm">
+              <i class="fas fa-check-circle"></i>
+            </div>
+          </div> -->
+        </div>
+        <!-- Right Content (Image) -->
+        <div class="w-full md:w-2/5 flex justify-center">
+          <div class="">
+            <img src="37a0f022b3f927f67da6be6f1c522900feeced8d.png" alt="" class="w-[525px] h-[350px]">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer id="contact" class="bg-white py-12 border-t border-gray-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+        <!-- Logo -->
+        <div class="flex items-center">
+          <!-- <svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-2">
+            <path d="M4 8H20M4 16H16M4 24H22M22 10L28 16L20 28" stroke="#6C4DFF" stroke-width="3" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg>
+          <span class="font-bold text-xl text-primary">Evalify</span> -->
+ <img src="cb8b81f3f695ccaa88a2a199a16d5e49e712edf3(1)(1).png" alt="Evalify Logo"
+            class="w-25 h-8 object-contain mr-2">        </div>
+
+        <!-- Copyright -->
+        <div class="text-gray-500 text-sm font-medium">
+          Copyright &copy; 2026 All rights reserved
+        </div>
+
+        <!-- Socials -->
+        <div class="flex space-x-4">
+          <a href="#"
+            class="w-10 h-10 rounded-full bg-gray-50 border border-gray-200 flex items-center justify-center text-gray-500 hover:bg-primary hover:text-white transition-all duration-300 hover:shadow-md transform hover:-translate-y-1">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="#"
+            class="w-10 h-10 rounded-full bg-gray-50 border border-gray-200 flex items-center justify-center text-gray-500 hover:bg-primary hover:text-white transition-all duration-300 hover:shadow-md transform hover:-translate-y-1">
+            <i class="fab fa-google"></i>
+          </a>
+          <a href="#"
+            class="w-10 h-10 rounded-full bg-gray-50 border border-gray-200 flex items-center justify-center text-gray-500 hover:bg-primary hover:text-white transition-all duration-300 hover:shadow-md transform hover:-translate-y-1">
+            <i class="fab fa-whatsapp"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu toggle logic
+    document.addEventListener('DOMContentLoaded', () => {
+      const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+      const mobileMenu = document.getElementById('mobile-menu');
+
+      mobileMenuBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+      });
+
+      // Close mobile menu when clicking a link
+      const mobileLinks = mobileMenu.querySelectorAll('a');
+      mobileLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          mobileMenu.classList.add('hidden');
+        });
+      });
+
+      // Navbar shadow on scroll
+      const navbar = document.getElementById('navbar');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 20) {
+          navbar.classList.add('shadow-md');
+          navbar.classList.remove('shadow-sm');
+        } else {
+          navbar.classList.remove('shadow-md');
+          navbar.classList.add('shadow-sm');
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>
