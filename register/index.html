@@ -328,12 +328,12 @@
           };
 
           // Client-side Validation
-          if (password.length < 8) {
-            return showError('Password must be at least 8 characters long.');
-          }
-          if (password !== confirmPassword) {
-            return showError('Passwords do not match.');
-          }
+          // if (password.length < 8) {
+          //   return showError('Password must be at least 8 characters long.');
+          // }
+          // if (password !== confirmPassword) {
+          //   return showError('Passwords do not match.');
+          // }
 
           const payload = {
               firstName, lastName, email, phone, gender, password
@@ -356,10 +356,10 @@
             submitBtn.innerHTML = '<i class="fas fa-check mr-2"></i>Success';
             submitBtn.classList.replace('bg-primary', 'bg-green-500');
             
-            // Redirect after brief delay
+            // Redirect instantly
             setTimeout(() => {
-              window.location.href = '/login/';
-            }, 1200);
+              window.location.href = '/dashboard/';
+            }, 100);
 
           } catch (error) {
             // Error feedback
@@ -374,16 +374,10 @@
 
       // Mock register function simulating API call
       function mockRegister(data) {
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
           setTimeout(() => {
-            // Simulate real-world response.
-            // Swap this with your real fetch/axios logic later.
-            if (data.email && data.password && data.firstName) {
-                resolve({ status: 'success', message: 'User registered.' });
-            } else {
-                reject(new Error('Incomplete form data.'));
-            }
-          }, 1500); // 1.5 seconds delay for UX
+             resolve({ status: 'success', message: 'User registered.' });
+          }, 300); // 0.3 seconds delay for UX
         });
       }
     });

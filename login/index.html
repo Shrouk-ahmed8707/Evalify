@@ -283,11 +283,11 @@
           const password = passwordInput.value;
 
           // Client-side Password Validation
-          if (password.length < 8) {
-            feedbackMessage.innerHTML = 'Password must be at least 8 characters long.';
-            feedbackMessage.className = 'text-center text-sm font-medium p-3 rounded-lg mt-4 transition-all duration-300 bg-red-100 text-red-700';
-            return;
-          }
+          // if (password.length < 8) {
+          //   feedbackMessage.innerHTML = 'Password must be at least 8 characters long.';
+          //   feedbackMessage.className = 'text-center text-sm font-medium p-3 rounded-lg mt-4 transition-all duration-300 bg-red-100 text-red-700';
+          //   return;
+          // }
 
           // Set Loading State
           submitBtn.disabled = true;
@@ -310,10 +310,10 @@
                 localStorage.removeItem('rememberedEmail');
             }
             
-            // Redirect after brief delay
+            // Redirect instantly
             setTimeout(() => {
               window.location.href = '/dashboard/';
-            }, 1000);
+            }, 100);
 
           } catch (error) {
             // Error feedback
@@ -330,20 +330,10 @@
 
       // Mock login function simulating API call
       function mockLogin(email, password) {
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
           setTimeout(() => {
-            // Mock database of registered users
-            const mockDatabase = ['test@example.com', 'admin@evalify.com'];
-            
-            if (!mockDatabase.includes(email)) {
-                reject(new Error('Account not found. Please <a href="/register/" class="underline font-semibold hover:text-red-800">register first</a>.'));
-            } else if (email && password) {
-                // Simulate real-world response. We'll pretend success here.
-                resolve({ status: 'success', token: 'mock-jwt-token-123' });
-            } else {
-                reject(new Error('Email and password are required.'));
-            }
-          }, 1500); // 1.5 seconds delay for UX
+             resolve({ status: 'success', token: 'mock-jwt-token-123' });
+          }, 300); // 0.3 seconds delay for UX
         });
       }
     });
