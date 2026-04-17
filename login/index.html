@@ -300,12 +300,8 @@
             // Example: await axios.post('/api/login', { email, password });
             await mockLogin(email, password);
 
-            // Success feedback
-            feedbackMessage.textContent = 'Login successful! Redirecting...';
-            feedbackMessage.classList.remove('hidden');
-            feedbackMessage.classList.add('bg-green-100', 'text-green-700');
-            submitBtn.innerHTML = '<i class="fas fa-check mr-2"></i>Success';
-            submitBtn.classList.replace('bg-primary', 'bg-green-500');
+            // Handle User Session Data
+            localStorage.setItem('userName', 'Dr. Sarah'); // Mock user name
 
             // Handle Remember Me
             if (rememberCheckbox && rememberCheckbox.checked) {
@@ -316,7 +312,7 @@
             
             // Redirect after brief delay
             setTimeout(() => {
-              window.location.href = '/';
+              window.location.href = '/dashboard/';
             }, 1000);
 
           } catch (error) {
